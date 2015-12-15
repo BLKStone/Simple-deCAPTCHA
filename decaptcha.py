@@ -1,48 +1,88 @@
 # -*- coding:utf-8 -*-
-import Image
-import ImageEnhance
-import ImageFilter
-import sys
 
-image_name = "./testpic/1.jpg"
+import cv2
+import numpy as np
 
-# 去除干扰点
-im = Image.open(image_name)
+class Analyzer(object):
 
-im = im.filter(ImageFilter.MedianFilter())
-enchancer = ImageEnhance.Contrast(im)
-im = im.convert('1')
+    def __init__(self, img_path):
+        self.img_path = img_path
+        self.img = cv2.imread(img_path)
+        self.rows, self.cols, self.channels = self.img.shape
+        self.height, self.width = self.img.shape[:2]
 
-im.show()
+    def analyze(self):
 
-s = 12      #启始 切割点 x
-t = 2       #启始 切割点 y
- 
-w = 10      #切割 宽 +y
-h = 15      #切割 长 +x
+        img_gray = cv2.cvtColor(self.img, cv2.COLOR_BGR2GRAY)
+        ret, self.img = cv2.threshold(img_gray, 0, 255, 
+            cv2.THRESH_BINARY + cv2.THRESH_OTSU)
 
-im_new = []
-for i in range(4): #验证码切割
-    im1 = im.crop((s+w*i+i*2,t,s+w*(i+1)+i*2,h))
-    im_new.append(im1)
- 
-im_new[0].show()#测试查看
+        cv2.imshow("Image", self.img)
+        cv2.waitKey(0)
 
-xsize, ysize = im_new[0].size
-gd = []
-for i in range(ysize):
-    tmp=[]
-    for j in range(xsize):
-        if( im_new[0].getpixel((j,i)) == 255 ):
-            tmp.append(1)
-        else:
-            tmp.append(0)
-    gd.append(tmp)
+        # finding the bounding of character
+        # adding the bound to avoid error
 
-#看效果
-for i in range(ysize):
-    print gd[i]
+        # self.img = cv2.copyMakeBorder(self.img, 5, 5, 5, 5, 
+        #     cv2.BORDER_CONSTANT, value=(255, 255, 255))
+        # ret, thresh = cv2.threshold(img_gray, 127, 255,
+        #     cv2.THRESH_BINARY)
+        # contours, hierarchy = cv2.findContours(thresh, 
+        #     cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
+        # x, y, w, h = cv2.boundingRect(contours[2])
+        # print x,y,w,h
+        # cv2.drawContours(self.img, contours, -1, (0,0,255),1)
+
+        # clear noise
+        # direct = [[1,1], [1,0], [1,-1],
+        #           [0,-1], [0,1],
+        #           [-1,-1], [-1,0],[-1,1]]
+
+        # w, h = self.img.shape[:2]
+
+        # for x in range(0, w - 1):
+        #     for y in range(0, h - 1):
+        #         flag = True
+        #         if self.img[x][y] == 0:
+        #             for (a, b) in direct: 
+        #                 if self.img[x+a,y+b] == 0:
+        #                     flag = False
+        #                     break
+        #             if flag:
+        #                 self.img[x][y] = 255
+
+        # split
+        ret, thresh = cv2.threshold(img_gray, 127, 255,
+            cv2.THRESH_BINARY)
+        # contours, hierarchy = cv2.findContours(thresh, 
+        #     cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
+        closing, contours, hierarchy = cv2.findContours(thresh,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
+
+        x, y, w, h = cv2.boundingRect(contours[6])
+        print x,y,w,h
+        roi = self.img[y:y+h,x:x+w]
+        print roi
+
+        # threshold = 2
+        # xpix = [0 for self.cols in range(self.width)]
+        # for i in range(self.rows - 1):
+        #     for j in range(self.cols - 1):
+        #         if(self.img[i,j] == 0):
+        #             xpix[j] += 1
+        # print xpix
+        # for i in range(len(xpix)):
+        #     if (xpix[i-1] < threshold and xpix[i] >= threshold):
+        #         print i
+
+    def show(self):
+        cv2.namedWindow("Image")
+        cv2.imshow("Image", self.img)
+        cv2.waitKey(0)
 
 
+if __name__ == '__main__':
+    analyzer = Analyzer('./testpic/1.jpg')
+    analyzer.analyze()
+    # analyzer.show()
 
-# http://www.xuyukun.com/python-%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB/
+
