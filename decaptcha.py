@@ -309,18 +309,18 @@ class Analyzer(object):
         image = Image.open('debug/rotate_fragment_1.png')
         print vcode
 
-
+# ----------------------------------------------------------------------------------
 # 以下为测试函数
 def testAllpic():
         # 指明被遍历的文件夹
         rootdir = "testpic"
         right_count = 0
         result_text = ''
-        # 三个参数：分别返回1.父目录 2.所有文件夹名字（不含路径） 3.所有文件名字
+        
+        # 遍历
         for parent,dirnames,filenames in os.walk(rootdir):
             # 输出文件信息
             for filename in filenames:
-                # 输出文件路径信息
 
                 analyzer = Analyzer(os.path.join(parent,filename))
                 analyzer.preprocess()
@@ -330,8 +330,6 @@ def testAllpic():
 
                 if filename.split('.')[0] == result:
                     right_count += 1
-
-
 
             print "正确率:"+ str(float(right_count)/(len(filenames)))
             print result_text
