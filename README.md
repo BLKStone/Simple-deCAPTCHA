@@ -29,6 +29,12 @@ http://drops.wooyun.org/tips/6313
 yzm_decode
 https://github.com/payonesmile/yzm_decode
 
+图像验证码和大规模图像识别技术
+http://www.infoq.com/cn/articles/CAPTCHA-image-recognition
+
+针对极验滑动式验证码的处理
+精易论坛
+
 
 ## 更多信息
 github 搜索关键词
