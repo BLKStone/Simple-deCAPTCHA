@@ -41,6 +41,11 @@ https://github.com/payonesmile/yzm_decode
 图像验证码和大规模图像识别技术
 http://www.infoq.com/cn/articles/CAPTCHA-image-recognition
 
+
+端到端的OCR：基于CNN的实现
+http://blog.xlvector.net/2016-05/mxnet-ocr-cnn/
+
+
 针对极验滑动式验证码的处理
 精易论坛
 
