@@ -26,6 +26,12 @@ http://www.cnbeta.com/articles/490545.htm
 验证码的未来：扒一扒reCAPTCHA的那些事
 http://www.freebuf.com/news/special/57496.html
 
+
+阿里云誉反欺诈
+验证码对抗之路及现有验证机制介绍
+http://www.freebuf.com/articles/security-management/105890.html
+
+
 PESIT decaptcha
 http://www.slideshare.net/guneshwor/decaptcha-31651647 
 
