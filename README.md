@@ -33,9 +33,9 @@ http://www.freebuf.com/articles/security-management/105890.html
 
 
 PESIT decaptcha
-http://www.slideshare.net/guneshwor/decaptcha-31651647 
+http://www.slideshare.net/guneshwor/decaptcha-31651647
 
-常见验证码的弱点与验证码识别 - [insight-labs](http://insight-labs.org/) 
+常见验证码的弱点与验证码识别 - [insight-labs](http://insight-labs.org/)
 http://drops.wooyun.org/tips/141
 
 Python识别网站验证码
@@ -54,6 +54,12 @@ http://blog.xlvector.net/2016-05/mxnet-ocr-cnn/
 
 针对极验滑动式验证码的处理
 精易论坛
+
+
+ReBreakCaptcha：利用谷歌来破解谷歌的验证码
+http://www.360zhijia.com/360anquanke/179207.html
+https://east-ee.com/2017/02/28/rebreakcaptcha-breaking-googles-recaptcha-v2-using-google/
+PoC https://github.com/eastee/rebreakcaptcha
 
 
 
